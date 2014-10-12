@@ -1,5 +1,4 @@
 package lsystem;
-import luxe.Entity;
 
 typedef LSystemOptions = 
 {
@@ -49,7 +48,6 @@ class LSystem
 			m_options.axiom = newAxiom;
 			currentIteration++;
 		}
-		trace("New Axiom: " + m_options.axiom);
 	}
 
 	private function parseCommand(cmd : String) : String

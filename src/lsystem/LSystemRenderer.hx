@@ -1,7 +1,6 @@
 package lsystem;
 import luxe.Vector;
 import luxe.Color;
-import luxe.Transform;
 
 typedef NodeState = 
 {
