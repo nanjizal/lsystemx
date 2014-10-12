@@ -1,13 +1,11 @@
 
 import luxe.Input;
+import luxe.Vector;
 import lsystem.LSystem;
 import lsystem.LSystemRenderer;
 
 class Main extends luxe.Game 
 {
-	var m_currTime : Float = 0.0;
-	var m_time : Float = 1.0;
-
     override function ready() 
     {
 
@@ -23,7 +21,7 @@ class Main extends luxe.Game
     	lsystem.iterate(6);
 
     	var renderer = new LSystemRenderer();
-    	renderer.draw(lsystem, 4);
+    	renderer.draw(lsystem, 4, 270.0, new Vector(Luxe.screen.w / 2, Luxe.screen.h + 50));
     } //ready
 
     override function onkeyup( e:KeyEvent ) 
