@@ -4,6 +4,12 @@ import luxe.Vector;
 import lsystem.LSystem;
 import lsystem.LSystemRenderer;
 
+//
+//  All axioms and rules used as examples below come from the wikipedia page for L-Systems 
+//  ( http://en.wikipedia.org/wiki/L-system ).
+//
+
+
 class Main extends luxe.Game 
 {
     override function ready() 
