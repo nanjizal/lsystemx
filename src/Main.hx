@@ -8,9 +8,9 @@ class Main extends luxe.Game
 {
     override function ready() 
     {
-        fractalPlant();
-    	
-    	//renderer.draw(lsystem, 4, 270.0, );
+        //fractalPlant();
+        //dragonCurve();
+        sierpinskiTriangle();
     } //ready
 
     function fractalPlant() : Void
@@ -45,9 +45,80 @@ class Main extends luxe.Game
                 case "A":
                     renderer.moveForwardAndDraw();
                 case "B":
-                    renderer.moveForward();
+                    renderer.moveForwardAndDraw();
             }
+        }
+    }
 
+    function dragonCurve() : Void
+    {
+        var options = {
+            axiom : "FX",
+            angle : 25.0
+        };
+        var lsystem = new LSystem(options);
+
+        lsystem.addRule("X", "X+YF");
+        lsystem.addRule("Y", "FX-Y");
+
+        lsystem.iterate(10);
+
+        var renderer = new LSystemRenderer(new Vector(Luxe.screen.w / 2, Luxe.screen.h / 2), 270.0, 12);
+
+        for( i in 0...lsystem.options.axiom.length)
+        {
+            var char = lsystem.options.axiom.charAt(i);
+
+            switch(char)
+            {
+                case "[":
+                    renderer.push();
+                case "]":
+                    renderer.pop();
+                case "+":
+                    renderer.rotate(90.0);
+                case "-":
+                    renderer.rotate(-90.0);
+                case "F":
+                    renderer.moveForwardAndDraw();
+            }
+        }
+    }
+
+    function sierpinskiTriangle() : Void
+    {
+        var options = {
+            axiom : "A",
+            angle : 25.0
+        };
+        var lsystem = new LSystem(options);
+
+        lsystem.addRule("A", "B-A-B");
+        lsystem.addRule("B", "A+B+A");
+
+        lsystem.iterate(8);
+
+        var renderer = new LSystemRenderer(new Vector(Luxe.screen.w - 50, Luxe.screen.h - 50), 180.0, 2);
+
+        for( i in 0...lsystem.options.axiom.length)
+        {
+            var char = lsystem.options.axiom.charAt(i);
+
+            switch(char)
+            {
+                case "[":
+                    renderer.push();
+                case "]":
+                    renderer.pop();
+                case "+":
+                    renderer.rotate(60.0);
+                case "-":
+                    renderer.rotate(-60.0);
+                case "A":
+                    renderer.moveForwardAndDraw();
+                case "B":
+                    renderer.moveForwardAndDraw();
+            }
         }
     }
 
