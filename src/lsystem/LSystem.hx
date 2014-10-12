@@ -60,10 +60,11 @@ class LSystem
 		return "";
 	}
 
-	//	Adds a new rule to the L-System.
-	//	The rules decide what structure the L-System will have after iterating. 
-	public function addRule(axiom : String, rule : String) : Void
+	//	Sets a rule to the L-System.
+	//	The rules decide what structure the L-System will have after iterating.
+	//	Old rules can be overridden by just setting the rule of the axiom again.
+	public function setRule(axiom : String, rule : String) : Void
 	{
-		m_rules[axiom] = rule;
+		m_rules.set(axiom, rule);
 	}
 }

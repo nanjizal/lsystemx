@@ -26,8 +26,8 @@ class Main extends luxe.Game
         };
         var lsystem = new LSystem(options);
 
-        lsystem.addRule("A", "B-[[A]+A]+B[+BA]-A");
-        lsystem.addRule("B", "BB");
+        lsystem.setRule("A", "B-[[A]+A]+B[+BA]-A");
+        lsystem.setRule("B", "BB");
 
         lsystem.iterate(4);
 
@@ -62,8 +62,8 @@ class Main extends luxe.Game
         };
         var lsystem = new LSystem(options);
 
-        lsystem.addRule("X", "X+YF");
-        lsystem.addRule("Y", "FX-Y");
+        lsystem.setRule("X", "X+YF");
+        lsystem.setRule("Y", "FX-Y");
 
         lsystem.iterate(10);
 
@@ -96,8 +96,8 @@ class Main extends luxe.Game
         };
         var lsystem = new LSystem(options);
 
-        lsystem.addRule("A", "B-A-B");
-        lsystem.addRule("B", "A+B+A");
+        lsystem.setRule("A", "B-A-B");
+        lsystem.setRule("B", "A+B+A");
 
         lsystem.iterate(8);
 
