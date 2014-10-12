@@ -3,8 +3,7 @@ import luxe.Entity;
 
 typedef LSystemOptions = 
 {
-	axiom : String,
-	angle : Float
+	axiom : String
 }
 
 class LSystem

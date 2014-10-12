@@ -22,8 +22,7 @@ class Main extends luxe.Game
     function fractalPlant() : Void
     {
         var options = {
-            axiom : "A",
-            angle : 25.0
+            axiom : "A"
         };
         var lsystem = new LSystem(options);
 
@@ -59,8 +58,7 @@ class Main extends luxe.Game
     function dragonCurve() : Void
     {
         var options = {
-            axiom : "FX",
-            angle : 25.0
+            axiom : "FX"
         };
         var lsystem = new LSystem(options);
 
@@ -94,8 +92,7 @@ class Main extends luxe.Game
     function sierpinskiTriangle() : Void
     {
         var options = {
-            axiom : "A",
-            angle : 25.0
+            axiom : "A"
         };
         var lsystem = new LSystem(options);
 
