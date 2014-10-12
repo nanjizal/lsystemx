@@ -32,16 +32,22 @@ class Main extends luxe.Game
         {
             var char = lsystem.options.axiom.charAt(i);
 
-            if (char == "[")
-                renderer.push();
-            else if (char == "]")
-                renderer.pop();
-            else if (char == "+")
-                renderer.rotate(25.0);
-            else if (char == "-")
-                renderer.rotate(-25.0);
-            else
-                renderer.moveForward();
+            switch(char)
+            {
+                case "[":
+                    renderer.push();
+                case "]":
+                    renderer.pop();
+                case "+":
+                    renderer.rotate(25.0);
+                case "-":
+                    renderer.rotate(-25.0);
+                case "A":
+                    renderer.moveForward();
+                case "B":
+                    renderer.moveForward();
+            }
+
         }
     }
 
