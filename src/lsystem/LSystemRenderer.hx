@@ -38,7 +38,7 @@ class LSystemRenderer
 		m_stateStack.pop();
 	}
 
-	public function moveForward() : Void
+	public function moveForwardAndDraw() : Void
 	{
 		var currentState = m_stateStack[m_stateStack.length - 1];
 		var newState = {
@@ -52,6 +52,19 @@ class LSystemRenderer
 		    p1 : new Vector( newState.pos.x, newState.pos.y ),
 		    color : new Color( 0.5, 0.2, 0.2, 1 )
 		});
+
+		//	Apply changes from new state to current.
+		m_stateStack[m_stateStack.length - 1] = {pos : newState.pos.clone(), angle: newState.angle};
+	}
+
+	public function moveForward() : Void
+	{
+		var currentState = m_stateStack[m_stateStack.length - 1];
+		var newState = {
+			pos : new Vector(currentState.pos.x + Math.cos(Deg2Rad(currentState.angle)) * m_lineLength,
+						currentState.pos.y + Math.sin(Deg2Rad(currentState.angle)) * m_lineLength),
+			angle : currentState.angle
+		};
 
 		//	Apply changes from new state to current.
 		m_stateStack[m_stateStack.length - 1] = {pos : newState.pos.clone(), angle: newState.angle};

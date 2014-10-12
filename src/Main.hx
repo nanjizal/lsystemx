@@ -43,7 +43,7 @@ class Main extends luxe.Game
                 case "-":
                     renderer.rotate(-25.0);
                 case "A":
-                    renderer.moveForward();
+                    renderer.moveForwardAndDraw();
                 case "B":
                     renderer.moveForward();
             }
