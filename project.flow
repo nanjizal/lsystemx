@@ -1,0 +1,25 @@
+{
+
+  project : {
+    name : 'L Systems',
+    version : '1.0.0',
+    author : 'Kristian Brodal',
+
+    app : {
+      name : 'l_systems',
+      package : 'org.brodal.lsystems'
+    },
+
+    build : {
+      dependencies : {
+        luxe : '*',
+      }
+    },
+
+    files : {
+      assets : 'assets/'
+    }
+
+  }
+
+}
