@@ -2,7 +2,7 @@
 import luxe.Input;
 import luxe.Vector;
 import lsystem.LSystem;
-import lsystem.LSystemRenderer;
+import renderers.TurtleGraphicsRenderer;
 
 //
 //  All axioms and rules used as examples below come from the wikipedia page for L-Systems 
@@ -31,7 +31,7 @@ class Main extends luxe.Game
 
         lsystem.iterate(4);
 
-        var renderer = new LSystemRenderer(new Vector(Luxe.screen.w / 2, Luxe.screen.h / 2), 270.0, 4);
+        var renderer = new TurtleGraphicsRenderer(new Vector(Luxe.screen.w / 2, Luxe.screen.h / 2), 270.0);
 
         for( i in 0...lsystem.options.axiom.length)
         {
@@ -48,9 +48,9 @@ class Main extends luxe.Game
                 case "-":
                     renderer.rotate(-25.0);
                 case "A":
-                    renderer.moveForwardAndDraw();
+                    renderer.moveForwardAndDraw(4);
                 case "B":
-                    renderer.moveForwardAndDraw();
+                    renderer.moveForwardAndDraw(4);
             }
         }
     }
@@ -67,7 +67,7 @@ class Main extends luxe.Game
 
         lsystem.iterate(10);
 
-        var renderer = new LSystemRenderer(new Vector(Luxe.screen.w / 2, Luxe.screen.h / 2), 270.0, 12);
+        var renderer = new TurtleGraphicsRenderer(new Vector(Luxe.screen.w / 2, Luxe.screen.h / 2), 270.0);
 
         for( i in 0...lsystem.options.axiom.length)
         {
@@ -84,7 +84,7 @@ class Main extends luxe.Game
                 case "-":
                     renderer.rotate(-90.0);
                 case "F":
-                    renderer.moveForwardAndDraw();
+                    renderer.moveForwardAndDraw(12);
             }
         }
     }
@@ -101,7 +101,7 @@ class Main extends luxe.Game
 
         lsystem.iterate(8);
 
-        var renderer = new LSystemRenderer(new Vector(Luxe.screen.w - 50, Luxe.screen.h - 50), 180.0, 2);
+        var renderer = new TurtleGraphicsRenderer(new Vector(Luxe.screen.w - 50, Luxe.screen.h - 50), 180.0);
 
         for( i in 0...lsystem.options.axiom.length)
         {
@@ -118,9 +118,9 @@ class Main extends luxe.Game
                 case "-":
                     renderer.rotate(-60.0);
                 case "A":
-                    renderer.moveForwardAndDraw();
+                    renderer.moveForwardAndDraw(2);
                 case "B":
-                    renderer.moveForwardAndDraw();
+                    renderer.moveForwardAndDraw(2);
             }
         }
     }

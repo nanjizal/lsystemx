@@ -1,4 +1,4 @@
-package lsystem;
+package renderers;
 import luxe.Vector;
 import luxe.Color;
 
@@ -8,15 +8,12 @@ typedef NodeState =
 	angle : Float
 };
 
-class LSystemRenderer
+class TurtleGraphicsRenderer
 {
 	private var m_stateStack : Array<NodeState>;
 
-	private var m_lineLength : Float;
-
-	public function new(initialPosition : Vector, initialAngle: Float, lineLength : Float) : Void
+	public function new(initialPosition : Vector, initialAngle: Float) : Void
 	{
-		m_lineLength = lineLength;
 		m_stateStack = new Array<NodeState>();
 		m_stateStack.push({pos : initialPosition, angle : initialAngle});
 	}
@@ -37,12 +34,12 @@ class LSystemRenderer
 		m_stateStack.pop();
 	}
 
-	public function moveForwardAndDraw() : Void
+	public function moveForwardAndDraw(distance : Float) : Void
 	{
 		var currentState = m_stateStack[m_stateStack.length - 1];
 		var newState = {
-			pos : new Vector(currentState.pos.x + Math.cos(Deg2Rad(currentState.angle)) * m_lineLength,
-						currentState.pos.y + Math.sin(Deg2Rad(currentState.angle)) * m_lineLength),
+			pos : new Vector(currentState.pos.x + Math.cos(Deg2Rad(currentState.angle)) * distance,
+						currentState.pos.y + Math.sin(Deg2Rad(currentState.angle)) * distance),
 			angle : currentState.angle
 		};
 
@@ -56,12 +53,12 @@ class LSystemRenderer
 		m_stateStack[m_stateStack.length - 1] = {pos : newState.pos.clone(), angle: newState.angle};
 	}
 
-	public function moveForward() : Void
+	public function moveForward(distance : Float) : Void
 	{
 		var currentState = m_stateStack[m_stateStack.length - 1];
 		var newState = {
-			pos : new Vector(currentState.pos.x + Math.cos(Deg2Rad(currentState.angle)) * m_lineLength,
-						currentState.pos.y + Math.sin(Deg2Rad(currentState.angle)) * m_lineLength),
+			pos : new Vector(currentState.pos.x + Math.cos(Deg2Rad(currentState.angle)) * distance,
+						currentState.pos.y + Math.sin(Deg2Rad(currentState.angle)) * distance),
 			angle : currentState.angle
 		};
 
