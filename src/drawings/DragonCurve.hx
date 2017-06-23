@@ -1,0 +1,30 @@
+package drawings;
+import lsystem.*;
+@:forward
+abstract DragonCurve( Drawing ) from Drawing to Drawing {
+    public inline function new( pos, lineFunc ){
+        var options = { axiom : "FX" };
+        var lsystem = new LSystem( options );
+        lsystem.setRule( "X", "X+YF" );
+        lsystem.setRule( "Y", "FX-Y" );
+        lsystem.iterate( 10 );
+        var angle = 270.0;
+        var line = lineFunc;
+        this = new Drawing( lsystem, pos, angle );
+        this.render = function( charCode: Int ): Void {
+            var s = this.stack;
+            switch( charCode ){
+                case "[".code:
+                    s.pushSame();
+                case "]".code:
+                    s.pop();
+                case "+".code:
+                    s.rotate(90.0);
+                case "-".code:
+                    s.rotate(-90.0);
+                case "F".code:
+                    line( cast s.forwardDraw(10) );
+            }
+        }
+    }
+}
