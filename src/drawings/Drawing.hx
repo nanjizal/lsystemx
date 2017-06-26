@@ -4,6 +4,7 @@ import lsystem.*;
 import target.LuxeLNode;
 class Drawing {
     // not happy about this but unsure.
+    
     public var stack: StateStack<Dynamic, Dynamic>;
     var axiom: String;
     public var length: Int;
@@ -13,6 +14,7 @@ class Drawing {
         var node = new LuxeLNode( pos, angle );
         stack = new StateStack( cast node );
         axiom = lsystem.options.axiom;
+        trace( 'axiom ' + axiom );
         length = axiom.length;
         iterator();
     }

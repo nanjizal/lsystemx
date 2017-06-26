@@ -2,13 +2,14 @@ package drawings;
 import lsystem.*;
 @:forward
 abstract DragonCurve( Drawing ) from Drawing to Drawing {
-    public inline function new( pos, lineFunc ){
+    public inline function new( iterations: Int, distance: Float, pos, lineFunc ){
         var options = { axiom : "FX" };
         var lsystem = new LSystem( options );
         lsystem.setRule( "X", "X+YF" );
         lsystem.setRule( "Y", "FX-Y" );
-        lsystem.iterate( 10 );
+        lsystem.iterate( iterations );// 10 
         var angle = 270.0;
+        var d = distance;
         var line = lineFunc;
         this = new Drawing( lsystem, pos, angle );
         this.render = function( charCode: Int ): Void {
@@ -23,7 +24,7 @@ abstract DragonCurve( Drawing ) from Drawing to Drawing {
                 case "-".code:
                     s.rotate(-90.0);
                 case "F".code:
-                    line( cast s.forwardDraw(10) );
+                    line( cast s.forwardDraw( d ) );// 10
             }
         }
     }

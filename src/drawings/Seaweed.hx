@@ -3,15 +3,16 @@ import luxe.Color;
 import lsystem.*;
 @:forward
 abstract Seaweed( Drawing ) from Drawing to Drawing {
-    public inline function new( pos, lineFunc, colorFunc ){
+    public inline function new( iterations: Int, distance: Float, pos, lineFunc, colorFunc ){
         var green = new Color().rgb(0x00ff00);
         var blue = new Color().rgb(0x0000ff);
         var red = new Color().rgb(0xff0000);
         var options = { axiom : "F" };
         var lsystem = new LSystem(options);
         lsystem.setRule( "F", "AFF[B-F++F][C+F--F]C++F--F" );
-        lsystem.iterate(5);
+        lsystem.iterate( iterations );//5
         var angle = 180.0;
+        var d = distance;
         var line = lineFunc;
         var color = colorFunc;
         this = new Drawing( lsystem, pos, angle );
@@ -27,7 +28,7 @@ abstract Seaweed( Drawing ) from Drawing to Drawing {
                 case '-'.code:
                     s.rotate(-27.0);
                 case 'F'.code:
-                    line( cast s.forwardDraw(1) );
+                    line( cast s.forwardDraw( d ) );// 1
                 case 'A'.code:
                     color( red );
                 case 'B'.code:
