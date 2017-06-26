@@ -1,0 +1,27 @@
+{
+
+  project : {
+    name : 'L Systems',
+    version : '1.0.0',
+    author : 'Nanjizal',
+
+    app : {
+      name : 'l_systems',
+      package : 'net.nanjizal.lsystems',
+      main : 'Animation'
+    },
+
+    build : {
+      dependencies : {
+        luxe : '*',
+      }
+    },
+
+    files : {
+      assets : 'assets/',
+      dest: 'animationBin/'
+    }
+
+  }
+
+}
