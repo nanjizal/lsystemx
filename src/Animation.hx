@@ -11,7 +11,7 @@ import drawings.*;
 //  ( http://en.wikipedia.org/wiki/L-system ).
 //  plantD, plantE, plantF from 1990 book Algorithmic Beauty of Plants.
 //  another source http://www.kevs3d.co.uk/dev/lsystems/
-class Main extends luxe.Game {
+class Animation extends luxe.Game {
     var green: Color;
     var blue: Color;
     var red: Color;
@@ -35,17 +35,17 @@ class Main extends luxe.Game {
         currentColor = red;
         graphics = new Array<phoenix.geometry.Geometry>();
         colors =   [    red, green, blue, red, green, green, red, green, yellow, red, grey ];
-        drawings = [    new PenoTriangle( position( 700, 600), line )
-                    ,   new FunnyTriangle( position( 100, 600 ), line )
-                    ,   new Tiles( centre(), line )
-                    ,   new Seaweed( position( 550, 600 ), line, setColor.bind( 3 ) )
-                    ,   new PondWeed( position( 750, 600 ), line, setColor.bind( 4 ) )
-                    ,   new SierpinskiSnowFlake( position( 500, 200 ), line )
-                    ,   new Plant( position( 90, 600 ), line )
-                    ,   new PlantE( position( 800, 300 ), line )
-                    ,   new PlantD( position( 400, 400 ), line )
-                    ,   new DragonCurve( topLeft(), line )
-                    ,   new SierpinskiTriangle( bottomRight(), line )
+        drawings = [    new PenoTriangle( 7, 4.5, position( 700, 600), line )
+                    ,   new FunnyTriangle( 6, 10, position( 100, 600 ), line )
+                    ,   new Tiles( 5, 20, centre(), line )
+                    ,   new Seaweed( 5, 1, position( 550, 600 ), line, setColor.bind( 3 ) )
+                    ,   new PondWeed( 5, 5, position( 750, 600 ), line, setColor.bind( 4 ) )
+                    ,   new SierpinskiSnowFlake( 4, 2, position( 500, 200 ), line )
+                    ,   new Plant( 4, 4, position( 90, 600 ), line )
+                    ,   new PlantE( 7, 1, position( 800, 300 ), line )
+                    ,   new PlantD( 7, 1, position( 400, 400 ), line )
+                    ,   new DragonCurve( 10, 10, topLeft(), line )
+                    ,   new SierpinskiTriangle( 8, 2, bottomRight(), line )
         ];
     }
     inline public function setColor( count: Int, col: Color ){
