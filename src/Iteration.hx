@@ -2,32 +2,20 @@ package;
 import luxe.Input;
 import luxe.Vector;
 import lsystem.*;
-import target.LuxeLNode;
 import phoenix.geometry.Geometry;
 import luxe.Color;
 import drawings.*;
+import khaMath.Vector2;
+import target.BasicColors;
 class Iteration extends luxe.Game {
-    var green: Color;
-    var blue: Color;
     var red: Color;
-    var yellow: Color;
-    var darkRed: Color;
-    var white: Color;
-    var grey: Color;
     var currentColor: Color;
     var graphics: Array<Geometry>;
     var drawing: Drawing;
     var drawings: Array<Drawing>;
     var colors: Array<Color>;
     override function ready() {
-        green = new Color().rgb(0x00ff00);
-        blue = new Color().rgb(0x0000ff);
-        red = new Color().rgb(0xff0000);
-        yellow = new Color().rgb( 0xFFFF00 );
-        white = new Color().rgb( 0xFFFFFF );
-        grey = new Color().rgb( 0xcccccc );
-        darkRed = new Color( 0.5, 0.2, 0.2, 1 );
-        currentColor = red;
+        red = currentColor = BasicColors.Red;
         graphics = new Array<phoenix.geometry.Geometry>();
         colors =   [];
         drawings = [];
@@ -49,24 +37,24 @@ class Iteration extends luxe.Game {
         var geom;
         while ((geom = graphics.pop()) != null) geom.drop();
     }
-    inline function position( x: Float, y: Float ): Vector {
-        return new Vector( x, y );
+    inline function position( x: Float, y: Float ): Vector2 {
+        return new Vector2( x, y );
     }
-    inline function centre():Vector {
-        return new Vector( Luxe.screen.w / 2, Luxe.screen.h / 2 );
+    inline function centre():Vector2 {
+        return new Vector2( Luxe.screen.w / 2, Luxe.screen.h / 2 );
     }
-    inline function bottomRight():Vector{
-        return new Vector( Luxe.screen.w - 50, Luxe.screen.h - 50 );
+    inline function bottomRight():Vector2{
+        return new Vector2( Luxe.screen.w - 50, Luxe.screen.h - 50 );
     }
     inline function topLeft():Vector{
         return new Vector( 80, 170 );
     }
     inline function line( line ){
-        var start: LuxeLNode = line.start;
-        var end: LuxeLNode = line.end;
+        var start: LNode = line.start;
+        var end:   LNode = line.end;
         var geom = Luxe.draw.line({
-            p0 : start.pos.clone(),
-            p1 : end.pos.clone(),
+            p0 : new Vector( start.pos.x, start.pos.y ),
+            p1 : new Vector( end.pos.x, end.pos.y ),
             color : currentColor
         });
         graphics[ graphics.length ] = geom;

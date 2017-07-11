@@ -1,27 +1,29 @@
 package;
-import luxe.Input;
-import luxe.Vector;
+import kha.Framebuffer;
+import kha.Scheduler;
+import kha.System;
+import kha.Image;
+import kha.Color;
+import kha.Assets;
+import kha.input.Keyboard;
+import kha.input.Mouse;
+import kha.input.KeyCode;
+import haxe.Http;
 import lsystem.*;
-import phoenix.geometry.Geometry;
-import luxe.Color;
 import drawings.*;
 import khaMath.Vector2;
-import luxe.Vector;
 import target.BasicColors;
-//  All axioms and rules used as examples below come from the wikipedia page for L-Systems 
-//  ( http://en.wikipedia.org/wiki/L-system ).
-//  plantD, plantE, plantF from 1990 book Algorithmic Beauty of Plants.
-//  another source http://www.kevs3d.co.uk/dev/lsystems/
-class Animation extends luxe.Game {
+
+typedef Line = { x0: Float, y0: Float, x1: Float, y1: Float, col: BasicColors }
+class AnimationKha {
     var currentColor: Color;
-    var graphics: Array<Geometry>;
+    var lines: Array<Line> = [];
     var drawing: Drawing;
     var drawings: Array<Drawing>;
     var colors: Array<Color>;
-    override function ready() {
-        //darkRed = new Color( 0.5, 0.2, 0.2, 1 );
+    
+    public function new() {
         currentColor = BasicColors.Red;
-        graphics = new Array<phoenix.geometry.Geometry>();
         colors =   [    BasicColors.Red
                     ,   BasicColors.Green
                     ,   BasicColors.Blue
@@ -45,22 +47,26 @@ class Animation extends luxe.Game {
                     ,   new DragonCurve( 10, 10, topLeft(), line )
                     ,   new SierpinskiTriangle( 8, 2, bottomRight(), line )
         ];
+        System.notifyOnRender(render);
+        Scheduler.addTimeTask(update, 0, 1 / 60);
     }
     inline public function setColor( count: Int, col: Color ){
         colors[ count ] = col;
     }
     public function clear():Void {
-        var geom;
-        while ((geom = graphics.pop()) != null) geom.drop();
+        var aline;
+        while ((aline = lines.pop()) != null) {
+            
+        }
     }
     inline function position( x: Float, y: Float ): Vector2 {
         return new Vector2( x, y );
     }
     inline function centre():Vector2 {
-        return new Vector2( Luxe.screen.w / 2, Luxe.screen.h / 2 );
+        return new Vector2( 1024/ 2, 768 / 2 );
     }
     inline function bottomRight():Vector2{
-        return new Vector2( Luxe.screen.w - 50, Luxe.screen.h - 50 );
+        return new Vector2( 1024 - 50, 768 - 50 );
     }
     inline function topLeft():Vector2{
         return new Vector2( 80, 170 );
@@ -68,19 +74,16 @@ class Animation extends luxe.Game {
     inline function line( line ){
         var start: LNode = line.start;
         var end: LNode = line.end;
-        var geom = Luxe.draw.line({
-            p0 : new Vector( start.pos.x, start.pos.y ),
-            p1 : new Vector( end.pos.x, end.pos.y ),
-            color : currentColor
-        });
-        graphics[ graphics.length ] = geom;
-    }
-    override function onkeyup( e: KeyEvent ){
-        if( e.keycode == Key.escape ) Luxe.shutdown();
+        var aline: Line = { x0: start.pos.x
+                        ,   y0: start.pos.y
+                        ,   x1: end.pos.x
+                        ,   y1: end.pos.y
+                        ,   col: currentColor };
+        lines[ lines.length ] = aline;
     }
     var time: Int = 0;
     var speed: Int = 100;
-    override function update( dt: Float ){
+    function update(): Void {
         if( time == 1000 ) {
             speed = 10;
             clear();
@@ -98,5 +101,17 @@ class Animation extends luxe.Game {
             }
         }
         time++;
+    }
+    function render(framebuffer: Framebuffer): Void {
+        var g2 = framebuffer.g2;
+        g2.begin();
+        g2.clear( Color.fromValue(0xff000000) );
+        var l = lines.length;
+        for( i in 0...l ){
+            var aline = lines[ i ];
+            g2.color = aline.col;
+            g2.drawLine( aline.x0, aline.y0, aline.x1, aline.y1, 1.0 );
+        }
+        g2.end();
     }
 }
