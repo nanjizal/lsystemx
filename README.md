@@ -7,5 +7,9 @@ Lindenmayer system implemented in Haxe using the Luxe engine, forked and now und
 
 [demo of changing iteration number](https://rawgit.com/nanjizal/L-System/master/bin/webIteration/index.html)
 
+##Now requires generic Vector2 in khaMath folder ( nanjizal/khaMath ), and Kha in the Kha folder.
+
+[demo two part with Kha](https://rawgit.com/nanjizal/L-System/master/build/html5/index.html)
+
 Haxe: http://haxe.org/
 Luxe: http://luxeengine.com/
