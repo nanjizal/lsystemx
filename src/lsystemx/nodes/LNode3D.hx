@@ -1,4 +1,5 @@
-package lsystem;
+package lsystem.nodes;
+// TODO: implement and remove kha reliance
 import khaMath.Vector3;
 import khaMath.FastMatrix4;
 import khaMath.Quaternion;

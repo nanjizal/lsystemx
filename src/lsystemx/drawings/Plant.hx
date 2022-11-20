@@ -1,17 +1,18 @@
 package drawings;
 import lsystem.*;
 @:forward
-abstract PlantD( Drawing ) from Drawing to Drawing {
+abstract Plant( Drawing ) from Drawing to Drawing {
     public inline function new( iterations: Int, distance: Float, pos, lineFunc ){
-        var options = { axiom : 'X' };
+        var options = { axiom : "A" };
         var lsystem = new LSystem(options);
-        lsystem.setRule( "X", "F[+X]F[-X]+X" );
-        lsystem.setRule( "F", "FF" );
-        lsystem.iterate( iterations );// 7
+        lsystem.setRule( "A", "B-[[A]+A]+B[+BA]-A" );
+        lsystem.setRule( "B", "BB" );
+        lsystem.iterate( iterations );// 4
         var angle = 270.0;
         var d = distance;
         var line = lineFunc;
-        this = new Drawing( lsystem, pos, angle );
+        var node = new LNode( pos, angle );
+        this = new Drawing( lsystem, StateStack.dynamicConstructor( node ) );
         this.render = function( charCode: Int ): Void {
             var s = this.stack;
             switch( charCode ){
@@ -20,11 +21,11 @@ abstract PlantD( Drawing ) from Drawing to Drawing {
                 case ']'.code:
                     s.pop();
                 case '+'.code:
-                    s.rotate(20.);
+                    s.rotate(25.0);
                 case '-'.code:
-                    s.rotate(-20.);
-                case 'X'.code,'F'.code:
-                    line( cast s.forwardDraw( d ) );// 1
+                    s.rotate(-25.0);
+                case 'A'.code,'B'.code:
+                    line( cast s.forwardDraw( d ) );// 4
             }
         }
     }

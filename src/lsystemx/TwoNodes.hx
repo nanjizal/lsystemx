@@ -1,4 +1,4 @@
-package lsystem;
+package lsystemx;
 class TwoNodes<T:ConstraintNode<T,Q>,Q> {
     public function new( a_: T, b_: T ){
         start = a_;

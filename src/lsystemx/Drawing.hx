@@ -1,18 +1,13 @@
-package drawings;
-import luxe.Vector;
-import lsystem.*;
-import target.LuxeLNode;
+package lsystemx;
+import lsystemx.*;
 class Drawing {
-    // not happy about this but unsure.
-    
     public var stack: StateStack<Dynamic, Dynamic>;
     var axiom: String;
     public var length: Int;
     public var count: Int;
     public var render: Int -> Void;
-    public function new( lsystem: LSystem, pos: Vector, angle: Float ){
-        var node = new LuxeLNode( pos, angle );
-        stack = new StateStack( cast node );
+    public function new( lsystem: LSystem, stack: StateStack<Dynamic,Dynamic> ){
+        this.stack = stack;
         axiom = lsystem.options.axiom;
         trace( 'axiom ' + axiom );
         length = axiom.length;

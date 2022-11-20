@@ -1,4 +1,4 @@
-package lsystem;
+package lsystemx;
 
 typedef LSystemOptions = 
 {

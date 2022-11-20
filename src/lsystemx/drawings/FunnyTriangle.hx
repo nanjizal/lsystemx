@@ -13,7 +13,8 @@ abstract FunnyTriangle( Drawing ) from Drawing to Drawing {
         var angle = 270.0;
         var d = distance;
         var line = lineFunc;
-        this = new Drawing( lsystem, pos, angle );
+        var node = new LNode( pos, angle );
+        this = new Drawing( lsystem, StateStack.dynamicConstructor( node ) );
         this.render = function( charCode: Int ): Void {
             var s = this.stack;
             switch( charCode ){

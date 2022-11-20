@@ -1,3 +1,0 @@
-place khaMaths
-https://github.com/nanjizal/khaMath
-content in this folder
