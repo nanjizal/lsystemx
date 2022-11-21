@@ -1,4 +1,4 @@
-package lsystem.nodes;
+package lsystemx;
 import lsystemx.Mat1x2;
 /**
     Basic LSystem node
@@ -15,20 +15,16 @@ class LNode {
     public inline
     function transform( distance: Float ): LNode {
         var deg = Deg2Rad( angle );
-        return new LNode( 
-            new Mat1x2({ 
+        var pos_transform : Mat1x2 = { 
                     x: pos.x + Math.cos( deg ) * distance
                 ,   y: pos.y + Math.sin( deg ) * distance 
-                },  angle );
+                };
+        return new LNode( pos_transform, angle );
     }
     @:keep
     public inline
     function clone(): LNode {
-        return new LNode( 
-            new Mat1x2({ 
-                    x: pos.x
-                ,   y: pos.y
-                },  angle );
+        return new LNode( { x: pos.x, y: pos.y }, angle );
     }
     @:keep
     public inline
@@ -36,7 +32,7 @@ class LNode {
         angle += q;
     }
     inline
-    function Deg2Rad(degrees : Float) : Float{
+    function Deg2Rad( degrees : Float ): Float {
         return degrees * ( Math.PI / 180.0 );
     }
 }

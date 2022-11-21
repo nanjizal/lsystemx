@@ -16,14 +16,17 @@ class AnimationTest {
     var wid:          Float;
     var hi:           Float;
     var fillLine:     FillLine;
+    var traceAxiom:   Bool;
+    public
     function new( fillLine:  FillLine
                 , wid: Float, hi: Float
                 , traceAxiom = true ){
         this.fillLine = fillLine;
         this.wid      = wid;
         this.hi       = hi;
-        currentThick  = 5;
+        currentThick  = 5.;
         currentColor  = 0xFFFF0000;
+        this.traceAxiom = traceAxiom;
         initDrawings();
     }
     inline
@@ -63,19 +66,19 @@ class AnimationTest {
         // TODO..
     }
     inline
-    function position( x: Float, y: Float ): Matrix1x2 {
+    function position( x: Float, y: Float ): Mat1x2 {
         return { x: x, y: y };
     }
     inline
-    function centre(): Matrix1x2 {
+    function centre(): Mat1x2 {
         return { x: wid / 2, y: hi / 2 };
     }
     inline
-    function bottomRight(): Matrix1x2 {
+    function bottomRight(): Mat1x2 {
         return { x: wid - 50, y: hi - 50 };
     }
     inline
-    function topLeft():Matrix1x2{
+    function topLeft():Mat1x2{
         return { x: 80, y: 170 };
     }
     inline

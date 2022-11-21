@@ -6,7 +6,7 @@ class LSystem {
     var m_options:                  LSystemOptions;
     public var options( get, set ): LSystemOptions;
     function get_options():         LSystemOptions return m_options;
-    function set_options( _options: LSystemOptions ): LSystemOptions return m_options = _options; }
+    function set_options( _options: LSystemOptions ): LSystemOptions return m_options = _options;
     var m_rules : Map<String,String>;
     public function new( options: LSystemOptions ): Void {
         m_options = options;
