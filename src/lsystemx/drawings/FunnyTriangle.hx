@@ -1,8 +1,10 @@
-package drawings;
-import lsystem.*;
+package lsystemx.drawings;
+import lsystemx.*;
+@:transient
 @:forward
 abstract FunnyTriangle( Drawing ) from Drawing to Drawing {
-    public inline function new( iterations: Int, distance: Float, pos, lineFunc ){
+    public inline
+    function new( iterations: Int, distance: Float, pos, lineFunc, traceAxiom = true ){
         var options = { axiom : "W" };
         var lsystem = new LSystem(options);
         lsystem.setRule( "W", "+++X--F--ZFX+" );
@@ -10,11 +12,11 @@ abstract FunnyTriangle( Drawing ) from Drawing to Drawing {
         lsystem.setRule( "Y", "+ZFX--F--Z+++" );
         lsystem.setRule( "Z", "-YFW++F++Y---" );
         lsystem.iterate( iterations );// 6
-        var angle = 270.0;
-        var d = distance;
-        var line = lineFunc;
-        var node = new LNode( pos, angle );
-        this = new Drawing( lsystem, StateStack.dynamicConstructor( node ) );
+        var angle   = 270.0;
+        var d       = distance;
+        var line    = lineFunc;
+        var node    = new LNode( pos, angle );
+        this        = new Drawing( lsystem, StateStack.dynamicConstructor( node ), traceAxiom );
         this.render = function( charCode: Int ): Void {
             var s = this.stack;
             switch( charCode ){

@@ -1,5 +1,6 @@
 package lsystemx;
 
-function FillLine( sx: Float, sy: Float, ex: Float, ey: Float, thick: Float, color: Float, ?alpha: Float ){
-    
-}
+typedef FillLine = ( sx: Float, sy: Float
+                   , ex: Float, ey: Float
+                   , thick: Float
+                   , color: Float, ?alpha: Float ) -> Void;

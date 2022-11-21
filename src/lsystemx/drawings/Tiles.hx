@@ -1,8 +1,10 @@
-package drawings;
-import lsystem.*;
+package lsystemx.drawings;
+import lsystemx.*;
+@:transient
 @:forward
 abstract Tiles( Drawing ) from Drawing to Drawing {
-    public inline function new( iterations: Int, distance: Float, pos, lineFunc ){
+    public inline
+    function new( iterations: Int, distance: Float, pos, lineFunc, traceAxiom = true ){
         var options = { axiom : "[7]++[7]++[7]++[7]++[7]" };
         var lsystem = new LSystem(options);
         lsystem.setRule( "6", "81++91----71[-81----61]++" );
@@ -11,11 +13,11 @@ abstract Tiles( Drawing ) from Drawing to Drawing {
         lsystem.setRule( "9", "--81++++61[+91++++71]--71" );
         lsystem.setRule( "1",'');
         lsystem.iterate( iterations );// 5
-        var angle = 270.0;
-        var d = distance;
-        var line = lineFunc;
-        var node = new LNode( pos, angle );
-        this = new Drawing( lsystem, StateStack.dynamicConstructor( node ) );
+        var angle   = 270.0;
+        var d       = distance;
+        var line    = lineFunc;
+        var node    = new LNode( pos, angle );
+        this        = new Drawing( lsystem, StateStack.dynamicConstructor( node ), traceAxiom );
         this.render = function( charCode: Int ): Void {
             var s = this.stack;
             switch( charCode ){

@@ -1,8 +1,10 @@
-package drawings;
-import lsystem.*;
+package lsystemx.drawings;
+import lsystemx.*;
+@:transient
 @:forward
 abstract PenoTriangle( Drawing ) from Drawing to Drawing {
-    public inline function new( iterations: Int, distance: Float, pos, lineFunc ){
+    public inline
+    function new( iterations: Int, distance: Float, pos, lineFunc, traceAxiom = true ){
         var options = { axiom : "A" };
         var lsystem = new LSystem(options);
         lsystem.setRule( "A", "B-A-B" );
@@ -12,7 +14,7 @@ abstract PenoTriangle( Drawing ) from Drawing to Drawing {
         var d = distance;
         var line = lineFunc;
         var node = new LNode( pos, angle );
-        this = new Drawing( lsystem, StateStack.dynamicConstructor( node ) );
+        this = new Drawing( lsystem, StateStack.dynamicConstructor( node ), traceAxiom );
         this.render = function( charCode: Int ): Void {
             var s = this.stack;
             switch( charCode ){

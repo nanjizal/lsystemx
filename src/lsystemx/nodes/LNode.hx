@@ -25,7 +25,7 @@ class LNode {
         return new LNode( {x: pos.x, y: pos.y }, angle );
     }
     @:keep
-    public //inline
+    public inline
     function addAngle( q: Float ): Void {
         angle += q;
     }
