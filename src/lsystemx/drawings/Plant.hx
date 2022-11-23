@@ -4,7 +4,7 @@ import lsystemx.*;
 @:forward
 abstract Plant( Drawing ) from Drawing to Drawing {
     public inline
-    function new( iterations: Int, distance: Float, pos, lineFunc, traceAxiom = false ){
+    function new( iterations: Int, distance: Float, pos, lineFunc, traceAxiom = true ){
         var options = { axiom : "A" };
         var lsystem = new LSystem(options);
         lsystem.setRule( "A", "B-[[A]+A]+B[+BA]-A" );

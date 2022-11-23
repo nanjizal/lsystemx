@@ -22,25 +22,27 @@ class CanvasUse {
     var lastThick = 1.  ;
     var g: Surface;
     public function new(){
-        initDraw();
-        animationTest = new AnimationTest( fillLine, 1025, 768, true );
+        canvasSetup = new CanvasSetup();
+        g = canvasSetup.surface;
+        animationTest = new AnimationTest( fillLine, 1025, 768, false );
         setAnimate();
-    }
-    inline
-    function initDraw(){
-        g   = canvasSetup.surface;
-        g.lineStyle( 1, lastColor );
     }
     inline
     function fillLine( sx: Float, sy: Float
                      , ex: Float, ey: Float
                      , thick: Float
-                     , color: Int, ?alpha: Float ){
+                     , color: Int, ?alpha: Float = 1. ){
         // ignore alpha as not used uses 0xFFffFFff and not even alpha channel currently
         // currently does no drawings take advantage of line thickness but under future consideration
-        if( lastColor != color  ) g.lineStyle( thick, color );//|| lastThick != thick
+        color = color & 0xFFFFFF;
+        if( lastColor != color  ) {
+            g.endLines();
+            g.lineStyle( thick, color, 1 );//|| lastThick != thick
+            g.beginLines();
+        }
         g.moveTo( sx, sy );
         g.lineTo( ex, ey );
+        lastColor = color;
     }
     inline
     function setAnimate(){
@@ -50,5 +52,6 @@ class CanvasUse {
     inline
     function render(){
         animationTest.update( dt++ );
+        g.endLines();
     }
 }

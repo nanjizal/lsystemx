@@ -66,6 +66,7 @@ haxe_iterators_ArrayIterator.prototype = {
 	}
 };
 var htmlHelper_canvas_CanvasSetup = function() {
+	this.factor = 4.;
 	this.divertTrace = new htmlHelper_tools_DivertTrace();
 	var e = null;
 	var this1;
@@ -82,28 +83,34 @@ var htmlHelper_canvas_CanvasSetup = function() {
 	} else {
 		this1 = e;
 	}
-	var canvas = this1;
-	canvas.width = 1024;
-	canvas.height = 768;
-	var dom = canvas;
+	this.canvasWrapper = this1;
+	this.canvasWrapper.width = 1024;
+	this.canvasWrapper.height = 768;
+	var dom = this.canvasWrapper;
 	var style = dom.style;
 	style.background = "black";
-	window.document.body.appendChild(canvas);
-	var this1 = new htmlHelper_canvas_CanvasPlus(canvas.getContext("2d",null),10,10);
+	window.document.body.appendChild(this.canvasWrapper);
+	var this1 = new htmlHelper_canvas_CanvasPlus(this.canvasWrapper.getContext("2d",null),10,10);
+	this1.me.lineWidth = 1;
+	var tmp = StringTools.hex(16744272,6);
+	this1.me.strokeStyle = "#" + tmp;
 	this.surface = this1;
-	var factor = 4.;
-	this.overSampleCanvas(canvas,this.surface.me,factor);
+	this.overSampleCanvas();
 };
 htmlHelper_canvas_CanvasSetup.__name__ = true;
 htmlHelper_canvas_CanvasSetup.prototype = {
-	overSampleCanvas: function(canvas,ctx,factor) {
+	overSampleCanvas: function() {
+		var ctx = this.surface.me;
+		var canvas = this.canvasWrapper;
 		var width = canvas.width;
 		var height = canvas.height;
-		canvas.width = 0 | (width * factor | 0);
-		canvas.height = 0 | (height * factor | 0);
-		canvas.style.width = width + "px";
-		canvas.style.height = height + "px";
-		ctx.scale(factor,factor);
+		canvas.width = 0 | (width * this.factor | 0);
+		canvas.height = 0 | (height * this.factor | 0);
+		var dom = this.canvasWrapper;
+		var style = dom.style;
+		style.width = width + "px";
+		style.height = height + "px";
+		ctx.scale(this.factor,this.factor);
 	}
 };
 var htmlHelper_canvas_CanvasPlus = function(me,x,y) {
@@ -316,21 +323,9 @@ var lsystemx_demoUse_CanvasUse = function() {
 	this.lastColor = -1;
 	this.dt = 0;
 	this.canvasSetup = new htmlHelper_canvas_CanvasSetup();
+	this.canvasSetup = new htmlHelper_canvas_CanvasSetup();
 	this.g = this.canvasSetup.surface;
-	var this1 = this.g;
-	var col = this.lastColor;
-	var alpha = null;
-	this1.me.lineWidth = 1;
-	if(alpha != null && alpha != 1.0) {
-		var r = col >> 16 & 255;
-		var g = col >> 8 & 255;
-		var b = col & 255;
-		this1.me.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
-	} else {
-		var tmp = StringTools.hex(col,6);
-		this1.me.strokeStyle = "#" + tmp;
-	}
-	this.animationTest = new lsystemx_drawings_AnimationTest($bind(this,this.fillLine),1025,768,true);
+	this.animationTest = new lsystemx_drawings_AnimationTest($bind(this,this.fillLine),1025,768,false);
 	var _gthis = this;
 	if(htmlHelper_tools_AnimateTimer.s == null) {
 		htmlHelper_tools_AnimateTimer.s = window.document.createElement("style");
@@ -341,24 +336,23 @@ var lsystemx_demoUse_CanvasUse = function() {
 	}
 	htmlHelper_tools_AnimateTimer.onFrame = function(v) {
 		_gthis.animationTest.update(_gthis.dt++);
+		_gthis.g.me.stroke();
 	};
 };
 lsystemx_demoUse_CanvasUse.__name__ = true;
 lsystemx_demoUse_CanvasUse.prototype = {
 	fillLine: function(sx,sy,ex,ey,thick,color,alpha) {
+		if(alpha == null) {
+			alpha = 1.;
+		}
+		color &= 16777215;
 		if(this.lastColor != color) {
+			this.g.me.stroke();
 			var this1 = this.g;
-			var alpha = null;
 			this1.me.lineWidth = thick;
-			if(alpha != null && alpha != 1.0) {
-				var r = color >> 16 & 255;
-				var g = color >> 8 & 255;
-				var b = color & 255;
-				this1.me.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
-			} else {
-				var tmp = StringTools.hex(color,6);
-				this1.me.strokeStyle = "#" + tmp;
-			}
+			var tmp = StringTools.hex(color,6);
+			this1.me.strokeStyle = "#" + tmp;
+			this.g.me.beginPath();
 		}
 		var this1 = this.g;
 		this1.x = sx;
@@ -368,6 +362,7 @@ lsystemx_demoUse_CanvasUse.prototype = {
 		this1.x = ex;
 		this1.y = ey;
 		this1.me.lineTo(ex,ey);
+		this.lastColor = color;
 	}
 };
 function lsystemx_demoUse_CanvasUse_main() {
@@ -382,7 +377,7 @@ var lsystemx_drawings_AnimationTest = function(fillLine,wid,hi,traceAxiom) {
 	this.fillLine = fillLine;
 	this.wid = wid;
 	this.hi = hi;
-	this.currentThick = 5.;
+	this.currentThick = 0.5;
 	this.currentColor = -65536;
 	this.traceAxiom = traceAxiom;
 	this.colors = [-65536,-16711936,-16776961,-65536,-16711936,-16711936,-65536,-16711936,-256,-65536,-6710887];
@@ -695,7 +690,7 @@ var lsystemx_drawings_AnimationTest = function(fillLine,wid,hi,traceAxiom) {
 	var pos = new lsystemx_Mat1x2(90,600);
 	var traceAxiom = this.traceAxiom;
 	if(traceAxiom == null) {
-		traceAxiom = false;
+		traceAxiom = true;
 	}
 	var this7;
 	var options = { axiom : "A"};

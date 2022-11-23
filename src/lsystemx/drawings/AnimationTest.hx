@@ -24,7 +24,7 @@ class AnimationTest {
         this.fillLine = fillLine;
         this.wid      = wid;
         this.hi       = hi;
-        currentThick  = 5.;
+        currentThick  = 0.5;
         currentColor  = 0xFFFF0000;
         this.traceAxiom = traceAxiom;
         initDrawings();
