@@ -90,7 +90,7 @@ class AnimationTest {
     }
     var time: Int = 0;
     var speed: Int = 100;
-    public function update( dt: Float ){
+    public function update( ?dt: Null<Float> = 0 ){
         if( time == 1000 ) {
             speed = 10;
             clear();
