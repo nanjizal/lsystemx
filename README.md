@@ -10,6 +10,7 @@ Old demos
 [demo of changing iteration number luxe](https://rawgit.com/nanjizal/L-System/master/bin/webIteration/index.html)  
 [demo two part with Kha](https://rawgit.com/nanjizal/L-System/master/build/html5/index.html)  
   
-Updated from Haxe3 to latest Haxe4, and moved the demo to html canvas ( using my HtmlHelper library ). Will need to tweak to re allow Kha, Luxe is no longer active toolkit but will look to add Ceramic and others.
+Updated from Haxe3 to latest Haxe4, and moved the demo to html canvas ( using my HtmlHelper library ). Will need to tweak to re allow Kha, Luxe is no longer active toolkit.
 
-[html canvas](https://nanjizal.github.io/lsystemx/bin/)
+[html canvas demo](https://nanjizal.github.io/lsystemx/bin/)
+[html Flixel demo](https://nanjizal.github.io/lsystemx/export/html5/bin/index.html)
