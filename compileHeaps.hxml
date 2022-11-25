@@ -1,0 +1,10 @@
+
+-cp src
+-js binHeaps/hxHeaps/testHeaps.js
+-lib heaps
+-main lsystemx.demoUse.HeapsUse
+#-D js-flatten 
+--next
+-cmd echo '<!DOCTYPE html><meta charset="UTF-8"><html><body><canvas id="webgl" bgColor="#FF181818" width="1024" height="968"></div></canvas><script src="testHeaps.js"></script></body></html>' > binHeaps/hxHeaps/index.html
+-cmd cd binHeaps/hxHeaps/
+-cmd firefox "./index.html"
