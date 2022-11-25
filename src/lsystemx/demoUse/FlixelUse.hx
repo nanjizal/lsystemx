@@ -60,7 +60,7 @@ class FlxLsystemx extends FlxSprite {
     public
     function updateGraphics(){
         FlxSpriteUtil.beginDraw( null, null );
-        if( animationTest != null ) animationTest.update();
+        animationTest.update();
         FlxSpriteUtil.endDraw( this, {} );
     }
     public
