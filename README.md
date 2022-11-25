@@ -12,5 +12,7 @@ Old demos
   
 Updated from Haxe3 to latest Haxe4, and moved the demo to html canvas ( using my HtmlHelper library ). Will need to tweak to re allow Kha, Luxe is no longer active toolkit.
 
-[html canvas demo](https://nanjizal.github.io/lsystemx/bin/)
-[html Flixel demo](https://nanjizal.github.io/lsystemx/export/html5/bin/index.html)
+[html canvas demo](https://nanjizal.github.io/lsystemx/bin/)  
+
+[html Flixel demo](https://nanjizal.github.io/lsystemx/export/html5/bin/index.html)  
+
