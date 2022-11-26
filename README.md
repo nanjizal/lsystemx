@@ -17,3 +17,5 @@ Updated from Haxe3 to latest Haxe4, and moved the demo to html canvas ( using my
 [html Flixel demo](https://nanjizal.github.io/lsystemx/export/html5/bin/index.html)  
   
 [html Heaps demo](https://nanjizal.github.io/lsystemx/binHeaps/hxHeaps/index.html)
+
+ceramic - possible use within demoUse outlined but untested.
