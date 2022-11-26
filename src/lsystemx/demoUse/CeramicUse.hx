@@ -1,4 +1,5 @@
-package lsystemx.demoUse.lsystemx-ceramic;
+package lsystemx.demoUse;
+// theoretical implementation
 import lsystemx.drawings.AnimationTest;
 //import ceramic.Color;
 import ceramic.Line;
@@ -25,7 +26,7 @@ class CeramicUse extends Scene {
         var line = new Line();
         if( lastColor != color  ) {
             line.color = color;
-            line.thickness thick;
+            line.thickness = thick;
         }
         line.points = [ sx, sy, ex, ey ];
         add( line );

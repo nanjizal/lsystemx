@@ -1,6 +1,0 @@
-app:
-    package: lsystemx.demoUse.lsystemx-ceramic.CeramicUse
-    name: CeramicUse
-    displayName: lsystemx CeramicUse
-    author: Justin L Mills ( Nanjizal )
-    version: '1.0'
